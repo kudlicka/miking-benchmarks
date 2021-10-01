@@ -68,5 +68,16 @@ run-experiment-OptimizedCRBD:
 	cp output.toml output-$(prefix)-$(number_iterations)-experiment-OptimizedCRBD.toml
 	rm benchmark-suite/benchmarks/ppl/birch/experiment-OptimizedCRBD.toml benchmark-suite/benchmarks/ppl/rootppl/experiment-OptimizedCRBD.toml benchmark-suite/benchmarks/ppl/pyro+numba/experiment-OptimizedCRBD.toml
 
+
+run-experiment-ClaDS:
+	cp benchmark-suite/benchmarks/ppl/rootppl/experiment-ClaDS.toml.skip benchmark-suite/benchmarks/ppl/rootppl/experiment-ClaDS.toml
+	boot eval tool/main/main.mc  -- \
+	  --benchmarks benchmark-suite/benchmarks/ppl \
+	  --runtimes benchmark-suite/runtimes \
+	  --iters $(number_iterations) \
+	  --output toml \
+	  --warmups $(number_warmups)	
+	cp output.toml output-$(prefix)-$(number_iterations)-experiment-ClaDS.toml
+	rm benchmark-suite/benchmarks/ppl/rootppl/experiment-ClaDS.toml 
 clean:
 	rm output.toml
